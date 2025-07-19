@@ -1,33 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Admin Dashboard</title><link rel="stylesheet" href="css/style.css"></head>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="./css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
 <body>
-<nav><a href="index.html">Home</a> | <a href="#" id="logout-btn">Logout</a></nav>
-<main class="card"><h2>Admin Management</h2>
-<section class="form-card">
-  <h3>Categories</h3>
-  <form id="add-category-form"><input type="text" id="category-name" placeholder="Category Name" required><button type="submit" class="btn-primary">Add</button></form>
-  <div id="admin-category-list"></div>
-</section>
-<section class="form-card">
-  <h3>Cities</h3>
-  <form id="add-city-form"><input type="text" id="city-name" placeholder="City Name" required><button type="submit" class="btn-primary">Add</button></form>
-  <div id="admin-city-list"></div>
-</section>
-<section class="form-card">
-  <h3>Areas</h3>
-  <form id="add-area-form"><input type="text" id="area-name" placeholder="Area Name" required><button type="submit" class="btn-primary">Add</button></form>
-  <div id="admin-area-list"></div>
-</section>
-<section class="form-card">
-  <h3>All Sports Events</h3>
-  <div id="admin-sports-list"></div>
-</section>
-</main>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script type="module" src="js/firebase-config.js"></script>
-<script type="module" src="js/admin.js"></script>
+  <nav>
+    <div class="nav-center">
+      <a href="index.html" class="home-link" title="Go to Home">
+        <i class="fas fa-home"></i> Home
+      </a>
+    </div>
+    <a href="#" id="logout-btn" class="logout-btn" title="Logout">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+    <button id="dark-toggle" class="dark-toggle" title="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+  <main class="card">
+    <h2><i class="fas fa-user-shield"></i> Admin Management</h2>
+    <section class="form-card">
+      <h3><i class="fas fa-list"></i> Categories</h3>
+      <form id="add-category-form">
+        <input type="text" id="category-name" placeholder="Category Name" required title="Enter new category name">
+        <button type="submit" class="btn-primary" title="Add Category">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </form>
+      <div id="admin-category-list"></div>
+    </section>
+    <section class="form-card">
+      <h3><i class="fas fa-city"></i> Cities</h3>
+      <form id="add-city-form">
+        <input type="text" id="city-name" placeholder="City Name" required title="Enter new city name">
+        <button type="submit" class="btn-primary" title="Add City">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </form>
+      <div id="admin-city-list"></div>
+    </section>
+    <section class="form-card">
+      <h3><i class="fas fa-map-marker-alt"></i> Areas</h3>
+      <form id="add-area-form">
+        <input type="text" id="area-name" placeholder="Area Name" required title="Enter new area name">
+        <button type="submit" class="btn-primary" title="Add Area">
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </form>
+      <div id="admin-area-list"></div>
+    </section>
+    <section class="form-card">
+      <h3><i class="fas fa-futbol"></i> All Sports Events</h3>
+      <div id="admin-sports-list"></div>
+    </section>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/admin.js"></script>
+  <script>
+    const toggleBtn = document.getElementById('dark-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDark)) {
+      document.body.classList.add('dark');
+    }
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      if (document.body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
 </body>
+
 </html>
