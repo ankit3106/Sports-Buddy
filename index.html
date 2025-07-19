@@ -1,12 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sports Buddy</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <nav><h1>Sports Buddy</h1> <a href="login.html">Login</a> | <a href="register.html">Register</a></nav>
-  <main><h2>Welcome to Sports Buddy!</h2></main>
+  <nav>
+    <div class="nav-title">
+      <i class="fas fa-futbol"></i>
+      <h1>Sports Buddy</h1>
+    </div>
+    <div class="nav-links">
+      <a href="login.html" title="Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="register.html" title="Register"><i class="fas fa-user-plus"></i> Register</a>
+      <button id="dark-toggle" class="dark-toggle" title="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+  <main class="card">
+    <h2>Welcome to <span style="color:#128c7e">Sports Buddy</span>!</h2>
+    <p>Your platform to discover, join, and manage sports events in your city.</p>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <h3><i class="fas fa-users"></i> What Our Users Say</h3>
+      <div class="testimonial-list">
+        <blockquote>
+          <p>"Sports Buddy made it so easy to find and join local football matches. Highly recommended!"</p>
+          <footer>- Alex P.</footer>
+        </blockquote>
+        <blockquote>
+          <p>"I organized my first basketball event and got a great turnout. The platform is super user-friendly."</p>
+          <footer>- Priya S.</footer>
+        </blockquote>
+        <blockquote>
+          <p>"The search and event discovery features are fantastic. I never miss a marathon now!"</p>
+          <footer>- John D.</footer>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { db } from './js/firebase-config.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dark mode toggle
+      const toggleBtn = document.getElementById('dark-toggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDark)) {
+        document.body.classList.add('dark');
+      }
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark');
+          if (document.body.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+          } else {
+            localStorage.setItem('theme', 'light');
+          }
+        });
+      }
+    });
+
+
+
+  </script>
+
 </body>
+
 </html>
